@@ -1,0 +1,151 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+}
+
+header {
+    background-color: #d32f2f; /* UFC Red */
+    padding: 10px 20px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #ffcc00; /* Highlight */
+}
+
+main {
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #d32f2f; /* Red background */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0 0 10px;
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.hero .btn {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn:hover {
+    background-color: #cc0000;
+}
+
+/* Features Section */
+.features {
+    padding: 50px 20px;
+    background-color: #121212; /* Darker black */
+    color: #fff;
+}
+
+.features h2 {
+    margin-bottom: 30px;
+    color: #ffcc00;
+}
+
+.features-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Red glow */
+}
+
+.feature-card h3 {
+    color: #d32f2f;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #ccc;
+}
+
+/* Call to Action Section */
+.cta {
+    padding: 50px 20px;
+    background-color: #d32f2f;
+    color: #fff;
+    text-align: center;
+}
+
+.cta form {
+    margin-top: 20px;
+}
+
+.cta input[type="email"] {
+    padding: 10px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.cta button {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta button:hover {
+    background-color: #ffcc00;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #d32f2f;
+    color: #fff;
+}

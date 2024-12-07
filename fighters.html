@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fighter Profiles</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fighters.html">Fighter Profiles</a></li>
+                <li><a href="upcoming-fights.html">Upcoming Fights</a></li>
+                <li><a href="events.html">Fight Events</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Fighter Profiles</h1>
+        <input type="text" id="search-box" placeholder="Enter fighter's name">
+        <button onclick="fetchFighterProfiles(document.getElementById('search-box').value)">Search</button>
+        <section id="fighters-container" class="fighters-container"></section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 UFC Central. All rights reserved.</p>
+    </footer>
+</body>
+</html>
