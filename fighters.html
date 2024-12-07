@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fighter Profiles</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -21,13 +20,82 @@
 
     <main>
         <h1>Fighter Profiles</h1>
-        <input type="text" id="search-box" placeholder="Enter fighter's name">
-        <button onclick="fetchFighterProfiles(document.getElementById('search-box').value)">Search</button>
-        <section id="fighters-container" class="fighters-container"></section>
+        <p>Discover the warriors who define the UFC. Explore their stats, achievements, and unforgettable moments.</p>
+
+        <!-- Search Form -->
+        <section class="search-form">
+            <input type="text" id="fighterSearch" placeholder="Search for a fighter..." onkeyup="searchFighter()">
+            <button onclick="searchFighter()">Search</button>
+        </section>
+
+        <!-- Displaying Fighter Profiles -->
+        <section id="fighterProfiles" class="fighter-profiles">
+            <div class="fighter-card">
+                <img src="jon_jones.jpg" alt="Jon Jones"> 
+                <h2>Jon Jones</h2>
+                <p>Weight Class: Light Heavyweight</p>
+                <p>Record: 27-1-0</p>
+                <p>Known for his extraordinary reach and unorthodox style, Jon Jones is one of the greatest in MMA history.</p>
+            </div>
+            <div class="fighter-card">
+                <img src="israel_adesanya.jpg" alt="Israel Adesanya"> 
+                <h2>Israel Adesanya</h2>
+                <p>Weight Class: Middleweight</p>
+                <p>Record: 24-2-0</p>
+                <p>The "Last Stylebender," Adesanya is known for his precision striking and creative combinations.</p>
+            </div>
+            <div class="fighter-card">
+                <img src="islam_makhachev.jpg" alt="Islam Makhachev"> <!-- Replace with your local image path -->
+                <h2>Islam Makhachev</h2>
+                <p>Weight Class: Lightweight</p>
+                <p>Record: 26-1-0</p>
+                <p>A Dagestani champion, Islam dominates with his powerful wrestling, technique, and resilience.</p>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2024 UFC Central. All rights reserved.</p>
     </footer>
+
+    <script>
+        const apiKey = "b3de239d60msh0db6def5961ecdfp1b2481jsn0508b24836e3";
+        const apiHost = "mma-stats.p.rapidapi.com";
+
+        function searchFighter() {
+            const query = document.getElementById("fighterSearch").value;
+            fetch(`https://${apiHost}/fighters?search=${query}`, {
+                method: "GET",
+                headers: {
+                    "X-RapidAPI-Key": apiKey,
+                    "X-RapidAPI-Host": apiHost
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("fighterProfiles").innerHTML = ''; // Clear existing fighters
+                if (data.fighters && data.fighters.length > 0) {
+                    data.fighters.forEach(fighter => {
+                        const card = document.createElement('div');
+                        card.classList.add('fighter-card');
+                        card.innerHTML = `
+                            <img src="${fighter.image}" alt="${fighter.name}">
+                            <h2>${fighter.name}</h2>
+                            <p>Weight Class: ${fighter.weight_class}</p>
+                            <p>Record: ${fighter.record}</p>
+                            <p>${fighter.bio}</p>
+                        `;
+                        document.getElementById("fighterProfiles").appendChild(card);
+                    });
+                } else {
+                    document.getElementById("fighterProfiles").innerHTML = '<p>No fighters found.</p>';
+                }
+            })
+            .catch(error => {
+                console.log('Error fetching data: ', error);
+                document.getElementById("fighterProfiles").innerHTML = '<p>Unable to fetch fighter data. Please try again later.</p>';
+            });
+        }
+    </script>
 </body>
 </html>

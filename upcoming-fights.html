@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upcoming Fights</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -21,13 +20,79 @@
 
     <main>
         <h1>Upcoming Fights</h1>
-        <p>Click below to view the latest UFC events.</p>
-        <a href="https://www.ufc.com/events" target="_blank" class="btn">View UFC Events</a>
+        <p>Mark your calendars! Here are the upcoming fights you don't want to miss:</p>
+
+        <!-- Search Form -->
+        <section class="search-form">
+            <input type="text" id="fightSearch" placeholder="Search by fight or fighter..." onkeyup="searchFight()">
+            <button onclick="searchFight()">Search</button>
+        </section>
+
+        <!-- Displaying Upcoming Fights -->
+        <section id="upcomingFights" class="upcoming-fights">
+            <!-- Original Fight Cards -->
+            <div class="fight-card">
+                <h2>UFC 313 : Alex Pereira vs. Hill</h2>
+                <p>Date: April, 2025</p>
+                <p>Venue: T-Mobile Arena, Las Vegas</p>
+                <p>A clash of styles between a striking powerhouse and another power hitter.</p>
+            </div>
+            <div class="fight-card">
+                <h2>UFC 312 : Islam Makhachev vs. Arman Tsarukyan 2</h2>
+                <p>Date: January 18, 2025</p>
+                <p>Venue: Madison Square Garden, New York</p>
+                <p>The second fight to settle the score between two legendary lightweights.</p>
+            </div>
+            <div class="fight-card">
+                <h2>UFC 310 : Shavkat Rakhmanov vs. Ian Garry</h2>
+                <p>Date: December 08, 2024</p>
+                <p>Venue: Honda Center, Anaheim</p>
+                <p>A battle of elite young fighters both undefeated with Shavkat having 18 wins all by finishes. None of his opponents went past the final time mark, and he looks to fight to earn his shot at the title.</p>
+            </div>
+        </section>
     </main>
-    
 
     <footer>
         <p>&copy; 2024 UFC Central. All rights reserved.</p>
     </footer>
+
+    <script>
+        const apiKey = "b3de239d60msh0db6def5961ecdfp1b2481jsn0508b24836e3";
+        const apiHost = "mma-stats.p.rapidapi.com";
+
+        function searchFight() {
+            const query = document.getElementById("fightSearch").value;
+            fetch(`https://${apiHost}/fights?search=${query}`, {
+                method: "GET",
+                headers: {
+                    "X-RapidAPI-Key": apiKey,
+                    "X-RapidAPI-Host": apiHost
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("upcomingFights").innerHTML = ''; // Clear existing fights
+                if (data.fights && data.fights.length > 0) {
+                    data.fights.forEach(fight => {
+                        const card = document.createElement('div');
+                        card.classList.add('fight-card');
+                        card.innerHTML = `
+                            <h2>${fight.event_name}: ${fight.fighter1} vs ${fight.fighter2}</h2>
+                            <p>Date: ${fight.date}</p>
+                            <p>Venue: ${fight.venue}</p>
+                            <p>${fight.details}</p>
+                        `;
+                        document.getElementById("upcomingFights").appendChild(card);
+                    });
+                } else {
+                    document.getElementById("upcomingFights").innerHTML = '<p>No upcoming fights found.</p>';
+                }
+            })
+            .catch(error => {
+                console.log('Error fetching data: ', error);
+                document.getElementById("upcomingFights").innerHTML = '<p>Unable to fetch fight data. Please try again later.</p>';
+            });
+        }
+    </script>
 </body>
 </html>
