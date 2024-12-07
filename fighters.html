@@ -45,7 +45,7 @@
                 <p>The "Last Stylebender," Adesanya is known for his precision striking and creative combinations.</p>
             </div>
             <div class="fighter-card">
-                <img src="islam_makhachev.jpg" alt="Islam Makhachev"> <!-- Replace with your local image path -->
+                <img src="islam_makhachev.jpg" alt="Islam Makhachev"> 
                 <h2>Islam Makhachev</h2>
                 <p>Weight Class: Lightweight</p>
                 <p>Record: 26-1-0</p>
@@ -73,12 +73,15 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById("fighterProfiles").innerHTML = ''; // Clear existing fighters
+                document.getElementById("fighterProfiles").innerHTML = ''; 
                 if (data.fighters && data.fighters.length > 0) {
                     data.fighters.forEach(fighter => {
                         const card = document.createElement('div');
                         card.classList.add('fighter-card');
                         card.innerHTML = `
+
+
+                        
                             <img src="${fighter.image}" alt="${fighter.name}">
                             <h2>${fighter.name}</h2>
                             <p>Weight Class: ${fighter.weight_class}</p>
